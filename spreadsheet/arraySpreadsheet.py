@@ -32,31 +32,18 @@ class ArraySpreadsheet(BaseSpreadsheet):
     def appendRow(self) -> bool:
         col = self.colNum()
         self.spreadsheet.append([None] * col)
-
-        # TO BE IMPLEMENTED
-        pass
-
-        # REPLACE WITH APPROPRIATE RETURN VALUE
         return True
 
     def appendCol(self) -> bool:
         rows = self.rowNum()
         for row in self.spreadsheet:
             row.append(None)
-        # TO BE IMPLEMENTED
-        pass
-
-        # REPLACE WITH APPROPRIATE RETURN VALUE
         return True
 
     def insertRow(self, rowIndex: int) -> bool:
         if rowIndex < -1 or rowIndex >= self.rowNum():
             return False
         self.spreadsheet.insert(rowIndex + 1, [None] * self.colNum())
-        # TO BE IMPLEMENTED
-        pass
-
-        # REPLACE WITH APPROPRIATE RETURN VALUE
         return True
 
     def insertCol(self, colIndex: int) -> bool:
@@ -64,20 +51,12 @@ class ArraySpreadsheet(BaseSpreadsheet):
             return False
         for row in self.spreadsheet:
             row.insert(colIndex + 1, None)
-        # TO BE IMPLEMENTED
-        pass
-
-        # REPLACE WITH APPROPRIATE RETURN VALUE
         return True
 
     def update(self, rowIndex: int, colIndex: int, value: float) -> bool:
         if rowIndex < 0 or rowIndex >= self.rowNum() or colIndex < 0 or colIndex >= self.colNum():
             return False
         self.spreadsheet[rowIndex][colIndex] = value
-        # TO BE IMPLEMENTED
-        pass
-
-        # REPLACE WITH APPROPRIATE RETURN VALUE
         return True
 
     def rowNum(self) -> int:
@@ -100,10 +79,6 @@ class ArraySpreadsheet(BaseSpreadsheet):
                     
         # TO BE IMPLEMENTED
         return cellVal
-        pass
-
-        # REPLACE WITH APPROPRIATE RETURN VALUE
-        return []
 
     def entries(self) -> list[Cell]:
         cellVal = []
@@ -113,7 +88,3 @@ class ArraySpreadsheet(BaseSpreadsheet):
                     cellVal.append(Cell(rowIndex,colIndex,cell))
         # TO BE IMPLEMENTED
         return cellVal
-        pass
-
-        # TO BE IMPLEMENTED
-        return []
