@@ -1,5 +1,5 @@
-from Assignment.spreadsheet.baseSpreadsheet import BaseSpreadsheet
-from Assignment.spreadsheet.cell import Cell
+from spreadsheet.baseSpreadsheet import BaseSpreadsheet
+from spreadsheet.cell import Cell
 
 
 # class ListNode:
