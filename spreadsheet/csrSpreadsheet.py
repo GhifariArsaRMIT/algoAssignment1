@@ -36,12 +36,12 @@ class CSRSpreadsheet(BaseSpreadsheet):
             values.append(cell.val)
             col_indices.append(cell.col)
             row_ptrs[cell.row] += 1
-            print(row_ptrs)
+            #print(row_ptrs)
             #print(cell.row, cell.col, cell.val)
 
         for i in range(1, mRow + 2):
             row_ptrs[i] += row_ptrs[i - 1]
-        print(row_ptrs)
+        #print(row_ptrs)
         #print(col_indices)
         #print(values)
         #print(row_ptrs)
@@ -133,12 +133,12 @@ class CSRSpreadsheet(BaseSpreadsheet):
         #print("columnarray assigned: ", self.colar)
         #print("original values array: ", self.values)
         self.cells = sorted(self.cells, key=lambda c: (c.row, c.col))
-        print("row to be updated: ", rowIndex, "col to be updated: ", colIndex)
+        #print("row to be updated: ", rowIndex, "col to be updated: ", colIndex)
         for i in range(len(self.sum) - 1):
             for j in range(len(columnarray) - 1):
                 if i == rowIndex and columnarray[j] == colIndex:
                     self.values[j] = value
-                    print(i,columnarray[j],self.values[j])
+                    #print(i,columnarray[j],self.values[j])
                     return True
                 elif colIndex not in columnarray and colIndex < self.numCol:
                     #if the colindex is not denote din the column array we must add a value to the column array such that it will
@@ -148,15 +148,15 @@ class CSRSpreadsheet(BaseSpreadsheet):
                     pos = self.sum[rowIndex]
                     #self.colar.append(colIndex)
                     self.colar.insert(pos, colIndex)
-                    print("new column array: ", self.colar)
+                    #print("new column array: ", self.colar)
                     #self.values.append(value)
                     self.values.insert(pos, value)
-                    print("new values array: ", self.values)
+                    #print("new values array: ", self.values)
                     #increment the row pointer at the new position
-                    print("old ptr array: ", self.sum) 
+                    #print("old ptr array: ", self.sum) 
                     for x in range(rowIndex, len(self.sum)):
                         self.sum[x] += 1  
-                    print("new ptr array: ", self.sum)       
+                    #print("new ptr array: ", self.sum)       
                     ##self.sum.pop(len(self.sum) - 1)
                     self.cells = sorted(self.cells, key=lambda c: (c.row, c.col))
                     return True
