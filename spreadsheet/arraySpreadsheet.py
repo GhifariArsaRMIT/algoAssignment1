@@ -13,7 +13,6 @@ from spreadsheet.baseSpreadsheet import BaseSpreadsheet
 class ArraySpreadsheet(BaseSpreadsheet):
 
     def __init__(self):
-        # print("Please enter a list of tuples of form (row,column,value) seperate dby commas: ")
         # TO BE IMPLEMENTED
         pass
 
