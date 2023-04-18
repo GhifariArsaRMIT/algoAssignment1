@@ -148,7 +148,7 @@ if __name__ == '__main__':
             else:
                 print('Unknown command.')
                 print(line)
-
+        print("Total Time:", spreadsheet.global_time)
         outputFile.close()
         commandFile.close()
     except FileNotFoundError as e:

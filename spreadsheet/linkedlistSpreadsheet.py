@@ -1,6 +1,7 @@
 from spreadsheet.baseSpreadsheet import BaseSpreadsheet
 from spreadsheet.cell import Cell
 import math
+import time
 class Node:
     def __init__(self, value: Cell):
         self.m_value = value
@@ -176,12 +177,17 @@ class DoubleLinkedList:
 # ------------------------------------------------------------------------
 
 class LinkedListSpreadsheet(BaseSpreadsheet):
+    
+    global_time = 0     
 
     def __init__(self):
         self.dll = DoubleLinkedList()
 
 
     def buildSpreadsheet(self, lCells: list[Cell]):
+        
+        # Record the start time
+        start_time = time.time()
         """
         Construct the data structure to store nodes.
         @param lCells: list of cells to be stored
@@ -196,20 +202,31 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         
         for cells in lCells:
             self.update(cells.row, cells.col, cells.val)
+        
+        # Record the end time
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for building:", running_time, "seconds")
+
             
-
-
     def appendRow(self):
         """
         Appends an empty row to the spreadsheet.
         """
+        start_time = time.time()
         maxCol = self.dll.maxColumn()
         newRow = self.dll.maxRow() + 1 
         
         for i in range(maxCol + 1):
             cell = Cell(row=newRow, col=i, val=None)
             self.dll.add(cell)
-        
+            
+        end_time = time.time()
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for appendRow:", running_time, "seconds")
         return True
 
 
@@ -219,6 +236,7 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
 
         @return True if operation was successful, or False if not.
         """
+        start_time = time.time()
         maxRow = self.dll.maxRow()
         newCol = self.dll.maxColumn() + 1
         
@@ -227,6 +245,11 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
             cell = Cell(row=i, col=newCol, val=None)
             self.dll.add(cell)
         
+        end_time = time.time()
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for appendCol:", running_time, "seconds")
+
         return True
 
 
@@ -238,6 +261,7 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
 
         @return True if operation was successful, or False if not, e.g., rowIndex is invalid.
         """
+        start_time = time.time()
         maxCol = self.dll.maxColumn()
         if rowIndex < -1 or rowIndex >= self.rowNum():
             return False
@@ -252,6 +276,13 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
             cell = Cell(row=rowIndex + 1, col=i, val=None)
             self.dll.add(cell)
         
+        # Record the end time
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for Insert Row:", running_time, "seconds")
+        
         return True
 
 
@@ -262,6 +293,7 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         @param colIndex Index of the existing column that will be before the newly inserted row.  If inserting as first column, specify colIndex to be -1.
         """
 
+        start_time = time.time()
         maxRow = self.dll.maxRow()
         if colIndex < -1 or colIndex >= self.colNum():
             return False
@@ -275,7 +307,13 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         for i in range(maxRow + 1):
             cell = Cell(row=i, col=colIndex + 1, val=None)
             self.dll.add(cell)
-
+        
+        # Record the end time
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for Insert Col:", running_time, "seconds")
         # REPLACE WITH APPROPRIATE RETURN VALUE
         return True
 
@@ -291,6 +329,7 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         @return True if cell can be updated.  False if cannot, e.g., row or column indices do not exist.
         """
         
+        start_time = time.time()
         if rowIndex < 0 or rowIndex > self.dll.maxRow() or colIndex < 0 or colIndex > self.dll.maxColumn():
             return False
         
@@ -300,6 +339,13 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
                 currentNode.m_value.val = value
                 return True
             currentNode = currentNode.m_next
+            
+        # Record the end time
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for Updating:", running_time, "seconds")
         
         return False
 
@@ -307,16 +353,34 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         """
         @return Number of rows the spreadsheet has.
         """
-
-        return self.dll.maxRow() + 1
+        start_time = time.time()
+        var = self.dll.maxRow() + 1
+        # Record the end time
+        
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for Row Num:", running_time, "seconds")
+        
+        return var
 
 
     def colNum(self)->int:
         """
         @return Number of column the spreadsheet has.
         """
-
-        return self.dll.maxColumn() + 1
+        start_time = time.time()
+        var = self.dll.maxColumn() + 1
+        
+        # Record the end time
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for ColNum:", running_time, "seconds")
+        
+        return var
 
 
 
@@ -328,20 +392,29 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
 
         @return List of cells (row, col) that contains the input value.
 	    """
-
+        returnVar = []
+        start_time = time.time()
         cur_node = self.dll.m_head
         for i in range(self.dll.m_length):
             if cur_node.get_value() is not None:
                 if cur_node.get_value().val == value:
-                    return [(cur_node.get_value().row, cur_node.get_value().col)]
+                    returnVar = [(cur_node.get_value().row, cur_node.get_value().col)]
             cur_node = cur_node.get_next()
             
-        return []
+        # Record the end time
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for Find:", running_time, "seconds")
+            
+        return returnVar
         
     def entries(self) -> [Cell]:
         """
         @return A list of cells that have values (i.e., all non None cells).
         """
+        start_time = time.time()
         returnlist = []
         
         currentNode = self.dll.m_head
@@ -352,5 +425,12 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
             currentNode = currentNode.m_next
         
         returnlist = sorted(returnlist, key=lambda c: (c.row, c.col))
-        # TO BE IMPLEMENTED
+        
+        # Record the end time
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for entries:", running_time, "seconds")
+        
         return returnlist
