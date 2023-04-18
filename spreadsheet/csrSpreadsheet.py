@@ -1,5 +1,6 @@
 from spreadsheet.baseSpreadsheet import BaseSpreadsheet
 from spreadsheet.cell import Cell
+import time
 
 # ------------------------------------------------------------------------
 # This class is required TO BE IMPLEMENTED
@@ -13,6 +14,8 @@ from spreadsheet.cell import Cell
 
 
 class CSRSpreadsheet(BaseSpreadsheet):
+    
+    global_time = 0
 
     def __init__(self):
         # TO BE IMPLEMENTED
@@ -24,6 +27,8 @@ class CSRSpreadsheet(BaseSpreadsheet):
         Construct the data structure to store nodes.
         @param lCells: list of cells to be stored
         """
+        start_time = time.time()
+        
         mRow = max(lCells, key=lambda c: c.row).row
         mCol = max(lCells, key=lambda c: c.col).col
         lCells = sorted(lCells, key=lambda c: (c.row, c.col))
@@ -50,8 +55,13 @@ class CSRSpreadsheet(BaseSpreadsheet):
         self.colar = col_indices
         self.values = values
         self.spreadsheet = (values, col_indices, row_ptrs)
-        # TO BE IMPLEMENTED
-        pass
+        
+        # Record the end time
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for building:", running_time, "seconds")
 
 
     def appendRow(self):
@@ -60,7 +70,15 @@ class CSRSpreadsheet(BaseSpreadsheet):
 
         @return True if operation was successful, or False if not.
         """ 
+        start_time = time.time()
         self.sum.append(self.sum[len(self.sum) - 1])
+        
+        # Record the end time
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for AppendRow:", running_time, "seconds")
         return True
         pass
 
@@ -71,7 +89,16 @@ class CSRSpreadsheet(BaseSpreadsheet):
 
         @return True if operation was successful, or False if not.
         """
+        start_time = time.time()
+        
         self.numCol + 1        
+        
+        # Record the end time
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for AppendCol:", running_time, "seconds")
         return True
         pass
 
@@ -86,13 +113,23 @@ class CSRSpreadsheet(BaseSpreadsheet):
         """
         #print("row to be inserted at ", rowIndex)
         #print("original rows: ", self.sum)
+        start_time = time.time()
+        val = False
         if rowIndex > -1 and rowIndex < self.rowNum(): 
             self.sum.insert(rowIndex, self.sum[rowIndex - 1])
             #print("modified rows: ", self.sum)
-            return True
+            val = True
         else:
-            return False
+            val = False
+            
+        # Record the end time
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for InsertRow:", running_time, "seconds")
         
+        return val
 
     def insertCol(self, colIndex: int)->bool:
         """
@@ -102,7 +139,9 @@ class CSRSpreadsheet(BaseSpreadsheet):
 
         return True if operation was successful, or False if not, e.g., colIndex is invalid.
         """
+        start_time = time.time()
         colValues = self.colar
+        val = True
         columnLength = self.colNum()
 
         #print("original column numbers: ", self.colar)
@@ -111,9 +150,18 @@ class CSRSpreadsheet(BaseSpreadsheet):
             for i in range(len(colValues)):
                 if colValues[i] > colIndex:
                     self.colar[i] = colValues[i] + 1
-            return True
+            val = True
         else:
-            return False
+            val = False
+        
+        # Record the end time
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for InsertCol:", running_time, "seconds")
+        
+        return val
 
     def update(self, rowIndex: int, colIndex: int, value: float) -> bool:
         """
@@ -128,6 +176,8 @@ class CSRSpreadsheet(BaseSpreadsheet):
 
         #print("test column array: ", self.colar)
 
+        start_time = time.time()
+        val = True
         columnarray = self.colar
 
         #print("columnarray assigned: ", self.colar)
@@ -139,7 +189,7 @@ class CSRSpreadsheet(BaseSpreadsheet):
                 if i == rowIndex and columnarray[j] == colIndex:
                     self.values[j] = value
                     #print(i,columnarray[j],self.values[j])
-                    return True
+                    val =  True
                 elif colIndex not in columnarray and colIndex < self.numCol:
                     #if the colindex is not denote din the column array we must add a value to the column array such that it will
                     #at the moment this returns false because although colum  10 exists it is not inside of the columnarray as the values represented are only ones which correlate to a value
@@ -159,8 +209,17 @@ class CSRSpreadsheet(BaseSpreadsheet):
                     #print("new ptr array: ", self.sum)       
                     ##self.sum.pop(len(self.sum) - 1)
                     self.cells = sorted(self.cells, key=lambda c: (c.row, c.col))
-                    return True
+                    val =  True
                     break
+                
+            # Record the end time
+            end_time = time.time()
+            # Calculate the running time
+            running_time = end_time - start_time
+            self.global_time += running_time
+            print("Running time for Update:", running_time, "seconds")
+            
+            return val
   
     
         # TO BE IMPLEMENTEDs
@@ -170,19 +229,40 @@ class CSRSpreadsheet(BaseSpreadsheet):
         """
         @return Number of rows the spreadsheet has.
         """
-        return len(self.sum) - 1
+        start_time = time.time()
+        
+        val = len(self.sum) - 1
+        
+        # Record the end time
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for rowNum:", running_time, "seconds")
+        
+        return val
         # TO BE IMPLEMENTED
 
     def colNum(self)->int:
         """
         @return Number of column the spreadsheet has.
         """
+        start_time = time.time()
+        
+        val = 0
         if len(self.sum) - 1 == 0:
-            return False
+            val = 0
         else:
-            return self.numCol
-        # TO BE IMPLEMENTED
-        return 0
+            val =  self.numCol
+            
+        # Record the end time
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for colNum:", running_time, "seconds")
+        
+        return val
 
     def find(self, value: float) -> list[(int, int)]:
         """
@@ -192,6 +272,7 @@ class CSRSpreadsheet(BaseSpreadsheet):
 
         @return List of cells (row, col) that contains the input value.
 	    """
+        start_time = time.time()
         cellval = []
 
         ptrIndex = 0
@@ -212,6 +293,13 @@ class CSRSpreadsheet(BaseSpreadsheet):
             prevptr = currptr
             ptrIndex += 1
 
+        # Record the end time
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for Find:", running_time, "seconds")
+        
         return cellval
         # TO BE IMPLEMENTED
 
@@ -224,6 +312,7 @@ class CSRSpreadsheet(BaseSpreadsheet):
         """
         return a list of cells that have values (i.e., all non None cells).
         """
+        start_time = time.time()
         cellval = []
         rowValueIndexDup = []
         rowValueIndex = []
@@ -239,5 +328,12 @@ class CSRSpreadsheet(BaseSpreadsheet):
         for y in range(len(rowValueIndex)):
             cell = Cell(rowValueIndex[y], self.colar[y], self.values[y])
             cellval.append((cell))
+            
+        # Record the end time
+        end_time = time.time()
+        # Calculate the running time
+        running_time = end_time - start_time
+        self.global_time += running_time
+        print("Running time for Entries:", running_time, "seconds")
 
         return cellval
