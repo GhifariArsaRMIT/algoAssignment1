@@ -35,7 +35,6 @@ class ArraySpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for building:", running_time, "seconds")
 
         pass
 
@@ -49,7 +48,6 @@ class ArraySpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for AppendingRow:", running_time, "seconds")
         
         return True
 
@@ -66,7 +64,6 @@ class ArraySpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for AppendCol:", running_time, "seconds")
         
         return True
 
@@ -82,7 +79,6 @@ class ArraySpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for InsertRow:", running_time, "seconds")
         
         return True
 
@@ -100,7 +96,6 @@ class ArraySpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for InsertCol:", running_time, "seconds")
         
         return var
 
@@ -118,7 +113,6 @@ class ArraySpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for Update:", running_time, "seconds")
         
         return var
 
@@ -131,7 +125,6 @@ class ArraySpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for RowNum:", running_time, "seconds")
         
         return var
         pass
@@ -150,7 +143,6 @@ class ArraySpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for ColNum:", running_time, "seconds")
         
         return var
         pass
@@ -169,7 +161,6 @@ class ArraySpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for Find:", running_time, "seconds")
         
         # TO BE IMPLEMENTED
         return cellVal
@@ -187,7 +178,6 @@ class ArraySpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for Entries:", running_time, "seconds")
         
         # TO BE IMPLEMENTED
         return cellVal

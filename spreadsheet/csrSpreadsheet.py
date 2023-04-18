@@ -61,7 +61,7 @@ class CSRSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for building:", running_time, "seconds")
+
 
 
     def appendRow(self):
@@ -78,7 +78,7 @@ class CSRSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for AppendRow:", running_time, "seconds")
+
         return True
         pass
 
@@ -98,7 +98,7 @@ class CSRSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for AppendCol:", running_time, "seconds")
+
         return True
         pass
 
@@ -127,7 +127,7 @@ class CSRSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for InsertRow:", running_time, "seconds")
+
         
         return val
 
@@ -159,7 +159,7 @@ class CSRSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for InsertCol:", running_time, "seconds")
+
         
         return val
 
@@ -217,7 +217,6 @@ class CSRSpreadsheet(BaseSpreadsheet):
             # Calculate the running time
             running_time = end_time - start_time
             self.global_time += running_time
-            print("Running time for Update:", running_time, "seconds")
             
             return val
   
@@ -238,7 +237,7 @@ class CSRSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for rowNum:", running_time, "seconds")
+
         
         return val
         # TO BE IMPLEMENTED
@@ -260,7 +259,7 @@ class CSRSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for colNum:", running_time, "seconds")
+
         
         return val
 
@@ -298,7 +297,7 @@ class CSRSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for Find:", running_time, "seconds")
+
         
         return cellval
         # TO BE IMPLEMENTED
@@ -334,6 +333,5 @@ class CSRSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for Entries:", running_time, "seconds")
 
         return cellval
