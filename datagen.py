@@ -17,12 +17,12 @@ def createFile(size: str):
         filename += str(i + 1)
         filename += ".txt"
         with open(filename, 'w') as file:
-            for i in range(0, ranges * 2 if i == 1 else ranges):
-                for j in range(0, ranges * 2 if i == 1 else ranges):
+            for j in range(0, ranges * 2 if i == 1 else ranges):
+                for k in range(0, ranges * 2 if i == 1 else ranges):
                     # Generate a random integer
                     random_integer = round(random.uniform(1.0, 1000.0), 2)
                     # Write the line number and random integer to the file
-                    file.write(f'{i} {j} {random_integer}\n')
+                    file.write(f'{j} {k} {random_integer}\n')
         filename = "randomData"
 
 createFile("Small")
