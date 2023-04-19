@@ -18,7 +18,6 @@ class CSRSpreadsheet(BaseSpreadsheet):
     global_time = 0
 
     def __init__(self):
-        # TO BE IMPLEMENTED
         pass
 
 
@@ -41,15 +40,9 @@ class CSRSpreadsheet(BaseSpreadsheet):
             values.append(cell.val)
             col_indices.append(cell.col)
             row_ptrs[cell.row] += 1
-            #print(row_ptrs)
-            #print(cell.row, cell.col, cell.val)
 
         for i in range(1, mRow + 2):
             row_ptrs[i] += row_ptrs[i - 1]
-        #print(row_ptrs)
-        #print(col_indices)
-        #print(values)
-        #print(row_ptrs)
         self.numCol = mCol + 2
         self.sum = row_ptrs
         self.colar = col_indices
@@ -111,13 +104,10 @@ class CSRSpreadsheet(BaseSpreadsheet):
 
         @return True if operation was successful, or False if not, e.g., rowIndex is invalid.
         """
-        #print("row to be inserted at ", rowIndex)
-        #print("original rows: ", self.sum)
         start_time = time.time()
         val = False
         if rowIndex > -1 and rowIndex < self.rowNum(): 
             self.sum.insert(rowIndex, self.sum[rowIndex - 1])
-            #print("modified rows: ", self.sum)
             val = True
         else:
             val = False
@@ -144,7 +134,6 @@ class CSRSpreadsheet(BaseSpreadsheet):
         val = True
         columnLength = self.colNum()
 
-        #print("original column numbers: ", self.colar)
         if colIndex > -1 and colIndex < columnLength:
             self.numCol = columnLength + 1
             for i in range(len(colValues)):
@@ -180,34 +169,21 @@ class CSRSpreadsheet(BaseSpreadsheet):
         val = True
         columnarray = self.colar
 
-        #print("columnarray assigned: ", self.colar)
-        #print("original values array: ", self.values)
+        if colIndex > self.numCol - 1 or rowIndex > len(self.sum) or colIndex < 0 or rowIndex < 0:
+            return False
         self.cells = sorted(self.cells, key=lambda c: (c.row, c.col))
-        #print("row to be updated: ", rowIndex, "col to be updated: ", colIndex)
         for i in range(len(self.sum) - 1):
             for j in range(len(columnarray) - 1):
                 if i == rowIndex and columnarray[j] == colIndex:
                     self.values[j] = value
-                    #print(i,columnarray[j],self.values[j])
                     val =  True
                 elif colIndex not in columnarray and colIndex < self.numCol:
-                    #if the colindex is not denote din the column array we must add a value to the column array such that it will
-                    #at the moment this returns false because although colum  10 exists it is not inside of the columnarray as the values represented are only ones which correlate to a value
-                    #if a value does not exists in these positions yet they will not appear thus we must create these positions
-                    #UPDATE A POSITION TO HOLD A VALUE HERE
+                    print("in second if", self.numCol)
                     pos = self.sum[rowIndex]
-                    #self.colar.append(colIndex)
                     self.colar.insert(pos, colIndex)
-                    #print("new column array: ", self.colar)
-                    #self.values.append(value)
                     self.values.insert(pos, value)
-                    #print("new values array: ", self.values)
-                    #increment the row pointer at the new position
-                    #print("old ptr array: ", self.sum) 
                     for x in range(rowIndex, len(self.sum)):
                         self.sum[x] += 1  
-                    #print("new ptr array: ", self.sum)       
-                    ##self.sum.pop(len(self.sum) - 1)
                     self.cells = sorted(self.cells, key=lambda c: (c.row, c.col))
                     val =  True
                     break
@@ -219,10 +195,6 @@ class CSRSpreadsheet(BaseSpreadsheet):
             self.global_time += running_time
             
             return val
-  
-    
-        # TO BE IMPLEMENTEDs
-
 
     def rowNum(self)->int:
         """
@@ -286,7 +258,6 @@ class CSRSpreadsheet(BaseSpreadsheet):
                 colIndex = self.colar[valueIndex]
                 if value == cellValue:
                     cellval.append((rowIndex,colIndex))
-                    #return cellval
                 ptrCheck += 1
                 valueIndex += 1
             prevptr = currptr
@@ -300,12 +271,6 @@ class CSRSpreadsheet(BaseSpreadsheet):
 
         
         return cellval
-        # TO BE IMPLEMENTED
-
-        # REPLACE WITH APPROPRIATE RETURN VALUE
-
-
-
 
     def entries(self) -> list[Cell]:
         """
