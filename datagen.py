@@ -16,13 +16,15 @@ def createFile(sizes: int, probability: float):
     elif sizes >= 100:
         sizeName = "Large"
         
+    secondSize = (sizes // 2) + sizes
+
     for i in range(2):
         filename += sizeName
         filename += str(i + 1)
         filename += ".txt"
         with open(filename, 'w') as file:
-            for j in range(0, (((sizes * 2) // 2) + sizes) if i == 1 else sizes):
-                for k in range(0, (((sizes * 2) // 2) + sizes) if i == 1 else sizes):
+            for j in range(0, secondSize if i == 1 else sizes):
+                for k in range(0, secondSize if i == 1 else sizes):
                     # Generate a random integer
                     random_integer = round(random.uniform(1.0, 1000.0), 2)
                     # Write the line number and random integer to the file
