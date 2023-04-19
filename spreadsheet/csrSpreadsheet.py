@@ -178,7 +178,6 @@ class CSRSpreadsheet(BaseSpreadsheet):
                     self.values[j] = value
                     val =  True
                 elif colIndex not in columnarray and colIndex < self.numCol:
-                    print("in second if", self.numCol)
                     pos = self.sum[rowIndex]
                     self.colar.insert(pos, colIndex)
                     self.values.insert(pos, value)
