@@ -194,14 +194,18 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         """
         maxRow = max([cell.row for cell in lCells])
         maxCol = max([cell.col for cell in lCells])
+        gang = {}
+        
+        for cells in lCells:
+            gang[(cells.row, cells.col)] = cells.val
         
         for i in range(maxRow + 1):
             for j in range(maxCol + 1):
                 cell = Cell(i,j,None)
+                gangCell = (cell.row, cell.col)
+                if gangCell in gang:
+                    cell.val = gang[gangCell]
                 self.dll.add(cell)
-        
-        for cells in lCells:
-            self.update(cells.row, cells.col, cells.val)
         
         # Record the end time
         end_time = time.time()
@@ -328,7 +332,8 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
 
         @return True if cell can be updated.  False if cannot, e.g., row or column indices do not exist.
         """
-        
+
+        gang = False
         start_time = time.time()
         if rowIndex < 0 or rowIndex > self.dll.maxRow() or colIndex < 0 or colIndex > self.dll.maxColumn():
             return False
@@ -337,7 +342,8 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         while currentNode is not None:
             if currentNode.m_value.row == rowIndex and currentNode.m_value.col == colIndex:
                 currentNode.m_value.val = value
-                return True
+                gang = True
+                break
             currentNode = currentNode.m_next
             
         # Record the end time
@@ -347,7 +353,7 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         self.global_time += running_time
         print("Running time for Updating:", running_time, "seconds")
         
-        return False
+        return gang
 
     def rowNum(self)->int:
         """
