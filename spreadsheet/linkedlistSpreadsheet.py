@@ -212,7 +212,7 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for building:", running_time, "seconds")
+
 
             
     def appendRow(self):
@@ -230,7 +230,7 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         end_time = time.time()
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for appendRow:", running_time, "seconds")
+
         return True
 
 
@@ -252,7 +252,7 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         end_time = time.time()
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for appendCol:", running_time, "seconds")
+
 
         return True
 
@@ -285,7 +285,7 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for Insert Row:", running_time, "seconds")
+
         
         return True
 
@@ -317,7 +317,7 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for Insert Col:", running_time, "seconds")
+
         # REPLACE WITH APPROPRIATE RETURN VALUE
         return True
 
@@ -351,7 +351,6 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for Updating:", running_time, "seconds")
         
         return gang
 
@@ -367,7 +366,6 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for Row Num:", running_time, "seconds")
         
         return var
 
@@ -384,7 +382,6 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for ColNum:", running_time, "seconds")
         
         return var
 
@@ -412,7 +409,6 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for Find:", running_time, "seconds")
             
         return returnVar
         
@@ -437,6 +433,5 @@ class LinkedListSpreadsheet(BaseSpreadsheet):
         # Calculate the running time
         running_time = end_time - start_time
         self.global_time += running_time
-        print("Running time for entries:", running_time, "seconds")
         
         return returnlist
