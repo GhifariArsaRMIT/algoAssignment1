@@ -2,7 +2,7 @@ import random
 
 # Generate a file with random numbers and their line numbers
 
-def createFile(size: str):
+def createFile(size: str, probability: float):
     filename = "randomData"
     ranges = 0
     if size == "Small":
@@ -22,11 +22,14 @@ def createFile(size: str):
                     # Generate a random integer
                     random_integer = round(random.uniform(1.0, 1000.0), 2)
                     # Write the line number and random integer to the file
-                    file.write(f'{j} {k} {random_integer}\n')
+                    
+                    random_float = random.random()
+                    if random_float <= probability:
+                        file.write(f'{j} {k} {random_integer}\n')
         filename = "randomData"
 
-createFile("Small")
-createFile("Medium")
-createFile("Large")
+createFile("Small", 0.8)
+createFile("Medium", 0.8)
+createFile("Large", 0.8)
                 
         
